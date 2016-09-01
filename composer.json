@@ -1,15 +1,16 @@
 {
-	"name": "typo3/cms-dbal",
-	"type": "typo3-cms-framework",
-	"description": "TYPO3 Core",
+	"name": "friendsoftypo3/dbal",
+	"type": "typo3-cms-extension",
+	"description": "A database abstraction layer implementation for TYPO3 4.6+ based on ADOdb and offering a lot of other features.",
 	"homepage": "https://typo3.org",
 	"license": ["GPL-2.0+"],
-
 	"require": {
-		"typo3/cms-core": "*"
+		"typo3/cms-core": "~8.4",
+		"friendsoftypo3/adodb": "~8.4"
 	},
 	"replace": {
-		"dbal": "*"
+		"dbal": "*",
+		"typo3/cms-dbal": "*"
 	},
 	"autoload": {
 		"psr-4": {
