@@ -2695,6 +2695,7 @@ class DatabaseConnection extends \TYPO3\CMS\Core\Database\DatabaseConnection
     {
         $whichTables = [];
         // Getting real list of tables:
+        $this->lastHandlerKey = '_DEFAULT';
         switch ($this->handlerCfg['_DEFAULT']['type']) {
             case 'native':
                 $tables_result = $this->query('SHOW TABLE STATUS FROM `' . $this->handlerCfg['_DEFAULT']['config']['database'] . '`');
@@ -2702,8 +2703,8 @@ class DatabaseConnection extends \TYPO3\CMS\Core\Database\DatabaseConnection
                     while ($theTable = $this->sql_fetch_assoc($tables_result)) {
                         $whichTables[$theTable['Name']] = $theTable;
                     }
+                    $tables_result->free();
                 }
-                $tables_result->free();
                 break;
             case 'adodb':
                 // check needed for install tool - otherwise it will just die because the call to
