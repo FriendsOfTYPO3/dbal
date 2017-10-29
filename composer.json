@@ -10,7 +10,8 @@
 	},
 	"require-dev": {
 		"typo3/cms": "^8.7",
-		"typo3/testing-framework": "^1.1"
+		"typo3/testing-framework": "^1.1",
+		"friendsofphp/php-cs-fixer": "^2.0"
 	},
 	"replace": {
 		"dbal": "*",
