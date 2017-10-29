@@ -26,8 +26,6 @@ class DatabaseConnectionPostgresqlTest extends AbstractTestCase
 
     /**
      * Prepare a DatabaseConnection subject ready to parse mssql queries
-     *
-     * @return void
      */
     protected function setUp()
     {

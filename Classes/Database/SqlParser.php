@@ -602,7 +602,8 @@ class SqlParser
                 $delim = $this->nextPart($parseString, '^(,|\\))');
                 if (!$delim) {
                     return $this->parseError('No delimiter found', $parseString);
-                } elseif ($delim === ')') {
+                }
+                if ($delim === ')') {
                     break;
                 }
             }
@@ -736,9 +737,8 @@ class SqlParser
                 return $this->parseError('Still content in clause after parsing!', $parseString);
             }
             return $result;
-        } else {
-            return $this->parseError('No table found!', $parseString);
         }
+        return $this->parseError('No table found!', $parseString);
     }
 
     /**
@@ -763,9 +763,8 @@ class SqlParser
                 return $this->parseError('Still content in clause after parsing!', $parseString);
             }
             return $result;
-        } else {
-            return $this->parseError('No database found!', $parseString);
         }
+        return $this->parseError('No database found!', $parseString);
     }
 
     /**
@@ -790,9 +789,8 @@ class SqlParser
                 return $this->parseError('Still content in clause after parsing!', $parseString);
             }
             return $result;
-        } else {
-            return $this->parseError('No table found!', $parseString);
         }
+        return $this->parseError('No table found!', $parseString);
     }
 
     /**************************************
@@ -1420,9 +1418,8 @@ class SqlParser
                     if ($stopRegex && ($this->lastStopKeyWord = $this->nextPart($parseString, $stopRegex))) {
                         $this->lastStopKeyWord = $this->normalizeKeyword($this->lastStopKeyWord);
                         return $stack[0];
-                    } else {
-                        return $this->parseError('No operator, but parsing not finished in parseWhereClause().', $parseString);
                     }
+                    return $this->parseError('No operator, but parsing not finished in parseWhereClause().', $parseString);
                 }
             }
             // Make recursivity check:
@@ -1598,20 +1595,17 @@ class SqlParser
                             $kVals[] = $vArr[0];
                         }
                         return $kVals;
-                    } else {
-                        return $listValues;
                     }
-                } else {
-                    return [$this->parseError('No ) parenthesis in list', $parseString)];
+                    return $listValues;
                 }
-            } else {
-                return [$this->parseError('No ( parenthesis starting the list', $parseString)];
+                return [$this->parseError('No ) parenthesis in list', $parseString)];
             }
-        } else {
-            // Just plain string value, in quotes or not:
-            // Quote?
-            $firstChar = $parseString[0];
-            switch ($firstChar) {
+            return [$this->parseError('No ( parenthesis starting the list', $parseString)];
+        }
+        // Just plain string value, in quotes or not:
+        // Quote?
+        $firstChar = $parseString[0];
+        switch ($firstChar) {
                 case '"':
                     $value = [$this->getValueInQuotes($parseString, '"'), '"'];
                     break;
@@ -1625,7 +1619,7 @@ class SqlParser
                         $value = [$reg[1]];
                     }
             }
-        }
+
         return $value;
     }
 
@@ -1754,9 +1748,8 @@ class SqlParser
     {
         if ((string)$this->databaseConnection->handlerCfg[$this->databaseConnection->lastHandlerKey]['type'] === 'native') {
             return $this->nativeSqlCompiler;
-        } else {
-            return $this->sqlCompiler;
         }
+        return $this->sqlCompiler;
     }
 
     /*************************
@@ -1783,14 +1776,12 @@ class SqlParser
             // Return new query if OK, otherwise show error and exit:
             if (!is_array($testResult)) {
                 return $newQuery;
-            } else {
-                debug(['ERROR MESSAGE' => 'Input query did not match the parsed and recompiled query exactly (not observing whitespace)', 'TEST result' => $testResult], 'SQL parsing failed:');
-                die;
             }
-        } else {
-            debug(['query' => $SQLquery, 'ERROR MESSAGE' => $parseResult], 'SQL parsing failed:');
+            debug(['ERROR MESSAGE' => 'Input query did not match the parsed and recompiled query exactly (not observing whitespace)', 'TEST result' => $testResult], 'SQL parsing failed:');
             die;
         }
+        debug(['query' => $SQLquery, 'ERROR MESSAGE' => $parseResult], 'SQL parsing failed:');
+        die;
     }
 
     /**

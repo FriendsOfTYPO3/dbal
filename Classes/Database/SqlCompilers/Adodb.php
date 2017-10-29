@@ -165,7 +165,10 @@ class Adodb extends AbstractCompiler
         }
 
         return $this->databaseConnection->handlerInstance[$this->databaseConnection->handler_getFromTableList($tableName)]->DataDictionary->CreateIndexSQL(
-            $indexIdentifier, $this->databaseConnection->quoteName($tableName, null, true), $indexFields, $indexOptions
+            $indexIdentifier,
+            $this->databaseConnection->quoteName($tableName, null, true),
+            $indexFields,
+            $indexOptions
         );
     }
 
@@ -185,7 +188,8 @@ class Adodb extends AbstractCompiler
         $indexIdentifier = $this->databaseConnection->quoteName(hash('crc32b', $tableName) . '_' . $indexName, null, true);
 
         return $this->databaseConnection->handlerInstance[$this->databaseConnection->handler_getFromTableList($tableName)]->DataDictionary->DropIndexSQL(
-            $indexIdentifier, $this->databaseConnection->quoteName($tableName)
+            $indexIdentifier,
+            $this->databaseConnection->quoteName($tableName)
         );
     }
 
