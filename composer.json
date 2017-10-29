@@ -8,6 +8,10 @@
 		"typo3/cms-core": "~8.4",
 		"friendsoftypo3/adodb": "~8.4"
 	},
+	"require-dev": {
+		"typo3/cms": "^8.7",
+		"typo3/testing-framework": "^1.1"
+	},
 	"replace": {
 		"dbal": "*",
 		"typo3/cms-dbal": "*"
@@ -20,6 +24,16 @@
 	"autoload-dev": {
 		"psr-4": {
 			"TYPO3\\CMS\\Dbal\\Tests\\": "Tests/"
+		}
+	},
+	"config": {
+		"vendor-dir": ".Build/vendor",
+		"bin-dir": ".Build/bin"
+	},
+	"extra": {
+		"typo3/cms": {
+			"cms-package-dir": "{$vendor-dir}/typo3/cms",
+			"web-dir": ".Build/Web"
 		}
 	}
 }
