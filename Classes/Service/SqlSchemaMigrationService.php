@@ -18,7 +18,7 @@ namespace TYPO3\CMS\Dbal\Service;
  * XCLASS of ext:install SqlSchemaMigrationService containing
  * a couple of ext:dbal specifics.
  */
-class SqlSchemaMigrationService
+class SqlSchemaMigrationService extends \TYPO3\CMS\Install\Service\SqlSchemaMigrationService
 {
     /**
      * @constant Maximum field width of MySQL
