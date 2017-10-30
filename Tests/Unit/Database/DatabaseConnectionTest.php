@@ -67,7 +67,6 @@ class DatabaseConnectionTest extends AbstractTestCase
      *
      * @param string $tableDefinition SQL script to create the extension's tables
      * @throws \RuntimeException
-     * @return void
      */
     protected function createFakeExtension($tableDefinition)
     {

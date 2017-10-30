@@ -219,8 +219,6 @@ class DatabaseConnection extends \TYPO3\CMS\Core\Database\DatabaseConnection
 
     /**
      * Initialize the database connection
-     *
-     * @return void
      */
     public function initialize()
     {
@@ -275,8 +273,6 @@ class DatabaseConnection extends \TYPO3\CMS\Core\Database\DatabaseConnection
 
     /**
      * Clears the cached field information file.
-     *
-     * @return void
      */
     public function clearCachedFieldInfo()
     {
@@ -285,8 +281,6 @@ class DatabaseConnection extends \TYPO3\CMS\Core\Database\DatabaseConnection
 
     /**
      * Caches the field information.
-     *
-     * @return void
      */
     public function cacheFieldInfo()
     {
@@ -310,8 +304,6 @@ class DatabaseConnection extends \TYPO3\CMS\Core\Database\DatabaseConnection
      * Loop through caching configurations
      * to find the usage of database backends and
      * parse and analyze table definitions
-     *
-     * @return void
      */
     protected function analyzeCachingTables()
     {
@@ -322,8 +314,6 @@ class DatabaseConnection extends \TYPO3\CMS\Core\Database\DatabaseConnection
     /**
      * Loop over all installed extensions
      * parse and analyze table definitions (if any)
-     *
-     * @return void
      */
     protected function analyzeExtensionTables()
     {
@@ -343,7 +333,6 @@ class DatabaseConnection extends \TYPO3\CMS\Core\Database\DatabaseConnection
      * Parse and analyze given SQL string
      *
      * @param $sql
-     * @return void
      */
     protected function parseAndAnalyzeSql($sql)
     {
@@ -381,7 +370,6 @@ class DatabaseConnection extends \TYPO3\CMS\Core\Database\DatabaseConnection
      * Analyzes fields and adds the extracted information to the field type, auto increment and primary key info caches.
      *
      * @param array $parsedExtSQL The output produced by \TYPO3\CMS\Install\Service\SqlSchemaMigrationService->getFieldDefinitions_fileContent()
-     * @return void
      */
     protected function analyzeFields($parsedExtSQL)
     {
@@ -1202,9 +1190,8 @@ class DatabaseConnection extends \TYPO3\CMS\Core\Database\DatabaseConnection
                 }
             }
             return $query;
-        } else {
-            throw new \InvalidArgumentException('TYPO3 Fatal Error: "Where" clause argument for UPDATE query was not a string in $this->UPDATEquery() !', 1270853887);
         }
+        throw new \InvalidArgumentException('TYPO3 Fatal Error: "Where" clause argument for UPDATE query was not a string in $this->UPDATEquery() !', 1270853887);
     }
 
     /**
@@ -1228,9 +1215,8 @@ class DatabaseConnection extends \TYPO3\CMS\Core\Database\DatabaseConnection
                 $this->debug_lastBuiltQuery = $query;
             }
             return $query;
-        } else {
-            throw new \InvalidArgumentException('TYPO3 Fatal Error: "Where" clause argument for DELETE query was not a string in $this->DELETEquery() !', 1310027383);
         }
+        throw new \InvalidArgumentException('TYPO3 Fatal Error: "Where" clause argument for DELETE query was not a string in $this->DELETEquery() !', 1310027383);
     }
 
     /**
@@ -1949,7 +1935,7 @@ class DatabaseConnection extends \TYPO3\CMS\Core\Database\DatabaseConnection
      * @return string Output string; Wrapped in single quotes and quotes in the string (" / ') and \ will be backslashed (or otherwise based on DBAL handler)
      * @see quoteStr()
      */
-    public function fullQuoteStr($str, $table,  $allowNull = false)
+    public function fullQuoteStr($str, $table, $allowNull = false)
     {
         if ($allowNull && $str === null) {
             return 'NULL';
@@ -2016,10 +2002,9 @@ class DatabaseConnection extends \TYPO3\CMS\Core\Database\DatabaseConnection
                 $this->handlerInstance[$handlerKey]->DataDictionary = NewDataDictionary($this->handlerInstance[$handlerKey]);
             }
             return $this->handlerInstance[$handlerKey]->DataDictionary->NameQuote($name);
-        } else {
-            $quote = $useBackticks ? '`' : $this->handlerInstance[$handlerKey]->nameQuote;
-            return $quote . $name . $quote;
         }
+        $quote = $useBackticks ? '`' : $this->handlerInstance[$handlerKey]->nameQuote;
+        return $quote . $name . $quote;
     }
 
     /**
@@ -2269,7 +2254,7 @@ class DatabaseConnection extends \TYPO3\CMS\Core\Database\DatabaseConnection
                             }
                         } else {
                             foreach ($output as $key => $value) {
-                                if (is_integer($key)) {
+                                if (is_int($key)) {
                                     unset($output[$key]);
                                 }
                             }
@@ -2330,7 +2315,7 @@ class DatabaseConnection extends \TYPO3\CMS\Core\Database\DatabaseConnection
                         $keyIndex = 0;
                         foreach ($output as $key => $value) {
                             unset($output[$key]);
-                            if (is_integer($key) || $this->runningADOdbDriver('mssql')) {
+                            if (is_int($key) || $this->runningADOdbDriver('mssql')) {
                                 $output[$keyIndex] = $value;
                                 if ($value === ' ') {
                                     // MSSQL does not know such thing as an empty string. So it returns one space instead, which we must fix.
@@ -2510,7 +2495,8 @@ class DatabaseConnection extends \TYPO3\CMS\Core\Database\DatabaseConnection
         if ($res === null) {
             debug(['no res in sql_field_type!']);
             return 'text';
-        } elseif (is_string($res)) {
+        }
+        if (is_string($res)) {
             if ($res === 'tx_dbal_debuglog') {
                 return 'text';
             }
@@ -2962,6 +2948,7 @@ class DatabaseConnection extends \TYPO3\CMS\Core\Database\DatabaseConnection
             case 'ALTERTABLE':
                 $this->createMappingsIfRequired($parsedQuery);
                 // Fall-through next instruction
+                // no break
             case 'DROPTABLE':
                 $this->clearCachedFieldInfo();
                 $this->map_genericQueryParsed($parsedQuery);
@@ -3013,6 +3000,7 @@ class DatabaseConnection extends \TYPO3\CMS\Core\Database\DatabaseConnection
                 // Compiling query:
                 $compiledQuery = $this->SQLparser->compileSQL($this->lastParsedAndMappedQueryArray);
                 $result = $this->handlerInstance[$this->lastHandlerKey]->admin_query($compiledQuery);
+                // no break
             default:
         }
         return $result;
@@ -3481,7 +3469,6 @@ class DatabaseConnection extends \TYPO3\CMS\Core\Database\DatabaseConnection
      *
      * @param array $sqlPartArray Array with parsed SQL parts; Takes both fields, tables, where-parts, group and order-by. Passed by reference.
      * @param string $defaultTable Default table name to assume if no table is found in $sqlPartArray
-     * @return void
      * @see map_remapSELECTQueryParts()
      */
     protected function map_sqlParts(&$sqlPartArray, $defaultTable)
@@ -3641,7 +3628,6 @@ class DatabaseConnection extends \TYPO3\CMS\Core\Database\DatabaseConnection
      * Maps table and field names in a subquery.
      *
      * @param array $parsedQuery
-     * @return void
      */
     protected function map_subquery(&$parsedQuery)
     {
@@ -3679,7 +3665,6 @@ class DatabaseConnection extends \TYPO3\CMS\Core\Database\DatabaseConnection
      *
      * @param array $parsedQuery Parsed QUERY as from \TYPO3\CMS\Dbal\Database\SqlParser::parseSQL(). NOTICE: Passed by reference!
      * @throws \InvalidArgumentException
-     * @return void
      * @see \TYPO3\CMS\Core\Database\SqlParser::parseSQL()
      */
     protected function map_genericQueryParsed(&$parsedQuery)
@@ -3740,7 +3725,6 @@ class DatabaseConnection extends \TYPO3\CMS\Core\Database\DatabaseConnection
      *
      * @param string $table (TYPO3) Table name for fields.
      * @param array $fieldArray Array of fieldnames to remap. Notice: Passed by reference!
-     * @return void
      */
     protected function map_fieldNamesInArray($table, &$fieldArray)
     {
@@ -3757,7 +3741,6 @@ class DatabaseConnection extends \TYPO3\CMS\Core\Database\DatabaseConnection
      * Create a mapping for each table and field if required.
      *
      * @param array $parsedQuery The parsed query
-     * @return void
      */
     protected function createMappingsIfRequired($parsedQuery)
     {
@@ -3810,7 +3793,6 @@ class DatabaseConnection extends \TYPO3\CMS\Core\Database\DatabaseConnection
      * @param string $function Function name from which this function is called.
      * @param string $execTime Execution time in ms of the query
      * @param array $inData In-data of various kinds.
-     * @return void
      * @access private
      */
     public function debugHandler($function, $execTime, $inData)
@@ -3904,7 +3886,6 @@ class DatabaseConnection extends \TYPO3\CMS\Core\Database\DatabaseConnection
      * @param string $table	Table name(s) the query was targeted at
      * @param string $where	The WHERE clause to be logged
      * @param string $script The script calling the logging
-     * @return void
      */
     public function debug_WHERE($table, $where, $script = '')
     {
@@ -3927,7 +3908,6 @@ class DatabaseConnection extends \TYPO3\CMS\Core\Database\DatabaseConnection
      * @param string $join Join string if there IS a join.
      * @param int $errorFlag Error status.
      * @param string $script The script calling the logging
-     * @return void
      */
     public function debug_log($query, $ms, $data, $join, $errorFlag, $script = '')
     {

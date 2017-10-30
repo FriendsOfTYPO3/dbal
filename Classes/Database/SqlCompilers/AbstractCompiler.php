@@ -234,13 +234,13 @@ abstract class AbstractCompiler
     protected function compileJoinIdentifier($identifierParts)
     {
         if ($identifierParts['type'] === 'cast') {
-            return sprintf('CAST(%s AS %s)',
+            return sprintf(
+                'CAST(%s AS %s)',
                 $identifierParts['table'] ? $identifierParts['table'] . '.' . $identifierParts['field'] : $identifierParts['field'],
                 $identifierParts['datatype'][0]
             );
-        } else {
-            return $identifierParts['table'] ? $identifierParts['table'] . '.' . $identifierParts['field'] : $identifierParts['field'];
         }
+        return $identifierParts['table'] ? $identifierParts['table'] . '.' . $identifierParts['field'] : $identifierParts['field'];
     }
 
     /**

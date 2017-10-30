@@ -162,7 +162,6 @@ class PostgresSpecifics extends AbstractSpecifics
      * @param string $groupBy
      * @param string $orderBy
      * @param string $limit
-     * @return void
      */
     public function transformQueryParts(&$select_fields, &$from_table, &$where_clause, &$groupBy = '', &$orderBy = '', &$limit = '')
     {

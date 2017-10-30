@@ -48,8 +48,6 @@ class ModuleController extends BaseScriptClass
 
     /**
      * Initializes this module.
-     *
-     * @return void
      */
     public function init()
     {
@@ -63,8 +61,6 @@ class ModuleController extends BaseScriptClass
 
     /**
      * Adds items to the ->MOD_MENU array. Used for the function menu selector.
-     *
-     * @return void
      */
     public function menuConfig()
     {
@@ -81,8 +77,6 @@ class ModuleController extends BaseScriptClass
 
     /**
      * Main function of the module. Write the content to $this->content
-     *
-     * @return void
      */
     public function main()
     {

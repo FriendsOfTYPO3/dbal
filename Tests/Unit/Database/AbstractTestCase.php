@@ -14,18 +14,29 @@ namespace TYPO3\CMS\Dbal\Tests\Unit\Database;
  * The TYPO3 project - inspiring people to share!
  */
 
+use TYPO3\CMS\Core\Utility\ExtensionManagementUtility;
 use TYPO3\CMS\Core\Utility\GeneralUtility;
-
-require_once __DIR__ . '/../../../../adodb/adodb/adodb.inc.php';
-require_once __DIR__ . '/../../../../adodb/adodb/drivers/adodb-mssql.inc.php';
-require_once __DIR__ . '/../../../../adodb/adodb/drivers/adodb-oci8.inc.php';
-require_once __DIR__ . '/../../../../adodb/adodb/drivers/adodb-postgres7.inc.php';
 
 /**
  * Base test case for dbal database tests.
  */
 abstract class AbstractTestCase extends \TYPO3\CMS\Core\Tests\UnitTestCase
 {
+    /**
+     * @param string $name
+     * @param array $data
+     * @param string $dataName
+     */
+    public function __construct($name = null, array $data = [], $dataName = '')
+    {
+        parent::__construct($name, $data, $dataName);
+
+        require_once ExtensionManagementUtility::extPath('adodb') . 'adodb/adodb.inc.php';
+        require_once ExtensionManagementUtility::extPath('adodb') . 'adodb/drivers/adodb-mssql.inc.php';
+        require_once ExtensionManagementUtility::extPath('adodb') . 'adodb/drivers/adodb-oci8.inc.php';
+        require_once ExtensionManagementUtility::extPath('adodb') . 'adodb/drivers/adodb-postgres7.inc.php';
+    }
+
     /**
      * Prepare a DatabaseConnection subject.
      * Used by driver specific test cases.

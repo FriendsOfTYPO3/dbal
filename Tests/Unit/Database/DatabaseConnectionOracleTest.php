@@ -26,8 +26,6 @@ class DatabaseConnectionOracleTest extends AbstractTestCase
 
     /**
      * Prepare a DatabaseConnection subject ready to parse oracle queries
-     *
-     * @return void
      */
     protected function setUp()
     {
