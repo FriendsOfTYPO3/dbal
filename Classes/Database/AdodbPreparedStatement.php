@@ -189,13 +189,9 @@ class AdodbPreparedStatement extends \TYPO3\CMS\Dbal\Database\DatabaseConnection
             $this->recordSet = $this->databaseConnection->handlerInstance[$this->databaseConnection->lastHandlerKey]->_Execute($this->databaseConnection->lastQuery);
         }
 
-        if ($this->recordSet !== false) {
-            $success = true;
+        $success = $this->recordSet !== false;
+        if ($success) {
             $this->recordSet->TYPO3_DBAL_handlerType = 'adodb';
-            // Setting handler type in result object (for later recognition!)
-            //$this->recordSet->TYPO3_DBAL_tableList = $queryComponents['ORIG_tableName'];
-        } else {
-            $success = false;
         }
 
         return $success;
