@@ -21,8 +21,7 @@ Database Abstraction Layer
 
 :License:
    This document is published under the
-   `Creative Commons BY 4.0 <https://creativecommons.org/licenses/by/4.0/>`__
-   license.
+   `Open Content License <https://www.openhub.net/licenses/opl>`__.
 
 :Rendered:
    |today|
