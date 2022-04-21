@@ -1,70 +1,64 @@
-.. ==================================================
-.. FOR YOUR INFORMATION
-.. --------------------------------------------------
-.. -*- coding: utf-8 -*- with BOM.
-
-.. include:: Includes.txt
-
-
-.. _start:
+.. include:: /Includes.rst.txt
 
 ==========================
 Database Abstraction Layer
 ==========================
 
 :Extension key:
-      dbal
+   dbal
+
+:Package name:
+   friendsoftypo3/dbal
 
 :Version:
-      |release|
+   |release|
 
 :Language:
-      en
-
-:Description:
-      Manual of the system extension DBAL, which provides an abstraction
-      layer in order to allow easy usage of TYPO3 with a broad variety of
-      database management systems.
-
-:Keywords:
-      database, abstraction, oracle, postgresql, mssql
-
-:Copyright:
-      2000-2014
+   en
 
 :Author:
-      TYPO3 CMS Core Development Team
+   TYPO3 contributors
 
 :License:
-      Open Content License available from `www.opencontent.org/opl.shtml
-      <http://www.opencontent.org/opl.shtml>`_
+   This document is published under the
+   `Open Content License <https://www.openhub.net/licenses/opl>`__.
 
 :Rendered:
-      |today|
+   |today|
 
-The content of this document is related to TYPO3,
+----
 
-a GNU/GPL CMS/Framework available from `www.typo3.org
-<http://www.typo3.org/>`_
+This extension includes an extended way for the `TYPO3_DB` database connection
+class to connect to databases like MSSQL, PostgreSQL and Oracle.
 
+The functionality was part of the TYPO3 Core, until TYPO3 v8.4, and moved into
+its own extension, receiving its own public repository. It is shipped as is.
 
+----
 
-
-**Table of Contents**
+**Table of Contents:**
 
 .. toctree::
-	:maxdepth: 5
-	:titlesonly:
-	:glob:
+   :maxdepth: 1
+   :titlesonly:
 
-	Introduction/Index
-	Configuration/Index
-	DebugBackendModule/Index
-	InstallingWithDbal/Index
-	Extensions/Index
-	KnownProblems/Index
-	Faq/Index
-	Bugs/Index
-	To-doList/Index
-	Appendices/Index
-	Targets
+   Introduction/Index
+   Installation/Index
+   Configuration/Index
+   DebugBackendModule/Index
+   InstallingWithDbal/Index
+   Extensions/Index
+   KnownProblems/Index
+   Faq/Index
+   Bugs/Index
+   ToDoList/Index
+   Appendices/Index
+   Contribution/Index
+
+.. Meta Menu
+
+.. toctree::
+   :hidden:
+
+   Sitemap
+   genindex
